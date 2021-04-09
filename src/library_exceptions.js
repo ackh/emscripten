@@ -110,6 +110,7 @@ var LibraryExceptions = {
     };
   },
 
+#if !DISABLE_EXCEPTION_CATCHING
   $CatchInfo__deps: ['$ExceptionInfo'],
   // This native structure is returned from __cxa_find_matching_catch, and serves as catching
   // context, i.e. stores information required to proceed with a specific selected catch. It stores
@@ -171,6 +172,7 @@ var LibraryExceptions = {
       this.ptr = ptr;
     }
   },
+#endif
 
   $exception_addRef: function (info) {
 #if EXCEPTION_DEBUG
@@ -287,6 +289,7 @@ var LibraryExceptions = {
     return type;
   },
 
+#if !DISABLE_EXCEPTION_CATCHING
   __cxa_begin_catch__deps: ['$CatchInfo', '$exceptionCaught', '$exception_addRef',
                             '$uncaughtExceptionCount'],
   __cxa_begin_catch: function(ptr) {
@@ -336,6 +339,7 @@ var LibraryExceptions = {
 #endif
     return new CatchInfo(ptr).get_exception_ptr();
   },
+#endif
 
   __cxa_uncaught_exceptions__deps: ['$uncaughtExceptionCount'],
   __cxa_uncaught_exceptions: function() {
@@ -371,6 +375,7 @@ var LibraryExceptions = {
     ___cxa_rethrow();
   },
 
+#if !DISABLE_EXCEPTION_CATCHING
   // Finds a suitable catch clause for when an exception is thrown.
   // In normal compilers, this functionality is handled by the C++
   // 'personality' routine. This is passed a fairly complex structure
@@ -440,6 +445,7 @@ var LibraryExceptions = {
     catchInfo.free();
     {{{ makeThrow('ptr') }}}
   },
+#endif
 };
 
 // In LLVM, exceptions generate a set of functions of form __cxa_find_matching_catch_1(), __cxa_find_matching_catch_2(), etc.

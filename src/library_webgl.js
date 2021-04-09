@@ -3538,6 +3538,7 @@ var LibraryGL = {
 
   // GLU
 
+  gluPerspective__deps: ['$GLImmediate'],
   gluPerspective: function(fov, aspect, near, far) {
     GLImmediate.matricesModified = true;
     GLImmediate.matrixVersion[GLImmediate.currentMatrix] = (GLImmediate.matrixVersion[GLImmediate.currentMatrix] + 1)|0;
@@ -3546,6 +3547,7 @@ var LibraryGL = {
                                                GLImmediate.matrix[GLImmediate.currentMatrix]);
   },
 
+  gluLookAt__deps: ['$GLImmediate'],
   gluLookAt: function(ex, ey, ez, cx, cy, cz, ux, uy, uz) {
     GLImmediate.matricesModified = true;
     GLImmediate.matrixVersion[GLImmediate.currentMatrix] = (GLImmediate.matrixVersion[GLImmediate.currentMatrix] + 1)|0;
